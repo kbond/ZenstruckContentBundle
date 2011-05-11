@@ -6,12 +6,7 @@ namespace Zenstruck\Bundle\CMSBundle\Entity;
  * @author Kevin Bond <kevinbond@gmail.com>
  * 
  * @orm:InheritanceType("JOINED")
- * @orm:DiscriminatorColumn(name="discr", type="string", length=20)
- * @orm:DiscriminatorMap({
- *      "node" = "Node",
- *      "page" = "Page",
- *      "blog_post" = "Zenstruck\ApplicationBundle\Entity\BlogPost"
- * })
+ * @orm:DiscriminatorColumn(name="content_type", type="string", length=50)
  * @orm:Entity
  */
 class Node extends Entity

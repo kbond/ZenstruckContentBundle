@@ -9,7 +9,8 @@
     </parameters>    
     
     <services>
-        <service id="zenstruck.cms.listener.discriminator" class="%zenstruck.cms.listener.discriminator.class%">        
+        <service id="zenstruck.cms.listener.discriminator" class="%zenstruck.cms.listener.discriminator.class%" public="false">   
+            <argument /> <!-- content types -->
             <tag name="doctrine.event_subscriber" />
         </service>
     </services>

@@ -14,9 +14,10 @@ class Configuration implements ConfigurationInterface
 
         $rootNode            
             ->children()
+                ->scalarNode('node_class')->defaultValue('Zenstruck\\Bundle\\CMSBundle\\Entity\\Node')->end()
                 ->arrayNode('content_types')                    
-                    ->useAttributeAsKey('name')
-                    ->prototype('array')
+                    ->useAttributeAsKey('key')                    
+                    ->prototype('scalar')
                 ->end()
             ->end()
         ;

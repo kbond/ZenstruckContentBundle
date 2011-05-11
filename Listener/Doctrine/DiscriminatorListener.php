@@ -12,6 +12,15 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
  */
 class DiscriminatorListener implements EventSubscriber
 {
+    protected $contentTypes;
+
+
+    public function __construct($contentTypes)
+    {        
+        $this->contentTypes = $contentTypes;
+    }
+
+
     public function getSubscribedEvents() 
     {  
         return array(Events::loadClassMetadata);
@@ -21,8 +30,12 @@ class DiscriminatorListener implements EventSubscriber
     {
         $classMetadata = $eventArgs->getClassMetadata();
         
-        /*if ($classMetadata->table['name'] == 'Node')
-            die(var_dump($classMetadata));*/
-        
+        // check if class is defined in config
+        if (isset($this->contentTypes[$classMetadata->name]))
+        {
+            // set discriminator
+            $classMetadata->discriminatorMap = array_flip($this->contentTypes);
+            $classMetadata->discriminatorValue = $this->contentTypes[$classMetadata->name];
+        }        
     }
 }
