@@ -2,36 +2,38 @@
 
 namespace Zenstruck\Bundle\CMSBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
- * 
- * @orm:MappedSuperClass
- * @orm:HasLifecycleCallbacks
+ *
+ * @ORM\MappedSuperClass
+ * @ORM\HasLifecycleCallbacks
  */
 class Entity
 {
     /**
-     * @orm:Id
-     * @orm:Column(type="integer")
-     * @orm:GeneratedValue
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
      */
     protected $id;
-    
+
     /**
      * @var datetime $updatedAt
      *
-     * @orm:Column(type="datetime")
+     * @ORM\Column(type="datetime")
      */
     protected $updatedAt;
-    
+
     /**
      * @var datetime $createdAt
      *
-     * @orm:Column(type="datetime")
+     * @ORM\Column(type="datetime")
      */
     protected $createdAt;
-    
-    public function getId()     
+
+    public function getId()
     {
         return $this->id;
     }
@@ -40,8 +42,8 @@ class Entity
     {
         $this->id = $id;
     }
-    
-    public function getUpdatedAt()     
+
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
@@ -60,24 +62,24 @@ class Entity
     {
         $this->createdAt = $createdAt;
     }
-    
+
     /**
-     * @orm:PrePersist
+     * @ORM\PrePersist
      */
     public function prePersist()
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
     }
-    
+
     /**
-     * @orm:PreUpdate
+     * @ORM\PreUpdate
      */
     public function preUpdate()
     {
         $this->updatedAt = new \DateTime();
     }
-    
+
     /**
      * Returns the machine name of the class (without namespace)
      */
@@ -85,10 +87,10 @@ class Entity
     {
         preg_match('#([\w]+)$#', get_class($this), $matches);
         $className = $matches[1];
-        
+
         // camel case
         $className = strtolower(preg_replace('#([a-z])([A-Z])#', '$1_$2', $className));
-        
+
         return $className;
     }
 }

@@ -2,21 +2,23 @@
 
 namespace Zenstruck\Bundle\CMSBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
- * 
- * @orm:InheritanceType("JOINED")
- * @orm:DiscriminatorColumn(name="content_type", type="string", length=50)
- * @orm:Entity
+ *
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="content_type", type="string", length=50)
+ * @ORM\Entity
  */
 class Node extends Entity
 {
     /**
-     * @orm:Column(type="string")
-     */    
+     * @ORM\Column(type="string")
+     */
     protected $title;
-    
-    public function getTitle()     
+
+    public function getTitle()
     {
         return $this->title;
     }
