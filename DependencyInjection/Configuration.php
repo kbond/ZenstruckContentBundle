@@ -12,11 +12,12 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('zenstruck_cms');
 
-        $rootNode            
+        $rootNode
             ->children()
+                ->booleanNode('use_controller')->defaultTrue()->end()
                 ->scalarNode('node_class')->defaultValue('Zenstruck\\Bundle\\CMSBundle\\Entity\\Node')->end()
-                ->arrayNode('content_types')                    
-                    ->useAttributeAsKey('key')                    
+                ->arrayNode('content_types')
+                    ->useAttributeAsKey('key')
                     ->prototype('scalar')
                 ->end()
             ->end()

@@ -9,7 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="content_type", type="string", length=50)
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Zenstruck\Bundle\CMSBundle\Repository\NodeRepository")
+ * @ORM\Table(name="zenstruck_cms_node")
  */
 class Node extends Entity
 {
@@ -17,6 +18,12 @@ class Node extends Entity
      * @ORM\Column(type="string")
      */
     protected $title;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Path", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="path_id", referencedColumnName="id", nullable=true)
+     */
+    protected $primaryPath;
 
     public function getTitle()
     {
@@ -26,5 +33,25 @@ class Node extends Entity
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * Set primaryPath
+     *
+     * @param Zenstruck\Bundle\CMSBundle\Entity\Path $primaryPath
+     */
+    public function setPrimaryPath(Path $primaryPath)
+    {
+        $this->primaryPath = $primaryPath;
+    }
+
+    /**
+     * Get primaryPath
+     *
+     * @return Zenstruck\Bundle\CMSBundle\Entity\Path $primaryPath
+     */
+    public function getPrimaryPath()
+    {
+        return $this->primaryPath;
     }
 }

@@ -5,16 +5,16 @@ namespace Zenstruck\Bundle\CMSBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class NodeController extends Controller
+class PathController extends Controller
 {
-    public function showAction($id)
+    public function showAction($uri)
     {
-        $node = $this->getDoctrine()->getEntityManager()->find('ZenstruckCMSBundle:Node', $id);
+        $node = $this->getDoctrine()->getRepository('ZenstruckCMSBundle:Node')->findOneByUri($uri);
 
         if (!$node) {
             throw $this->createNotFoundException('Node Not Found');
         }
-        
+
         $templating = $this->get('templating');
 
         $template = 'ZenstruckCMSBundle:CMS:'.$node->getContentType().'.html.twig';

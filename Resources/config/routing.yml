@@ -1,3 +1,0 @@
-cms_node:
-    pattern:  /node/{id}
-    defaults: { _controller: ZenstruckCMSBundle:Node:show }
