@@ -3,11 +3,13 @@
 namespace Zenstruck\Bundle\ContentBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Zenstruck\Bundle\ContentBundle\Validator as ZenstruckContentAssert;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
+ * @ZenstruckContentAssert\PathUnique()
  */
 abstract class Node extends Entity
 {
@@ -42,4 +44,5 @@ abstract class Node extends Entity
     {
         $this->path = trim($path, '/');
     }
+
 }
