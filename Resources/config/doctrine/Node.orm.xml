@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Zenstruck\Bundle\ContentBundle\Entity\Node"
+                       inheritance-type="JOINED"
+                       repository-class="Zenstruck\Bundle\ContentBundle\Repository\NodeRepository">
+
+        <discriminator-column name="content_type" type="string" length="50" />
+
+        <field name="title" type="string" length="255" />
+        <field name="path" type="string" length="255" unique="true" />
+    </entity>
+
+</doctrine-mapping>

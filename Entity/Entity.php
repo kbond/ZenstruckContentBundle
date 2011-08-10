@@ -6,42 +6,20 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
- *
- * @ORM\MappedSuperClass
- * @ORM\HasLifecycleCallbacks
  */
 class Entity
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
-     */
     protected $id;
 
     /**
      * @var datetime $updatedAt
-     *
-     * @ORM\Column(type="datetime")
      */
     protected $updatedAt;
 
     /**
      * @var datetime $createdAt
-     *
-     * @ORM\Column(type="datetime")
      */
     protected $createdAt;
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     public function getUpdatedAt()
     {
@@ -63,18 +41,12 @@ class Entity
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
     public function prePersist()
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
     }
 
-    /**
-     * @ORM\PreUpdate
-     */
     public function preUpdate()
     {
         $this->updatedAt = new \DateTime();
