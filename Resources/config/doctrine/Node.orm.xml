@@ -5,6 +5,7 @@
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Zenstruck\Bundle\ContentBundle\Entity\Node"
+                       table="zenstruck_content_node"
                        inheritance-type="JOINED"
                        repository-class="Zenstruck\Bundle\ContentBundle\Repository\NodeRepository">
 
