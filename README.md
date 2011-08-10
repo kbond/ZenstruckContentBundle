@@ -40,12 +40,22 @@ Add routing to your ``routing.yml``:
 
         zenstruck_content:
             content_types:
-                blog_post: YourApplicationBundle\Entity\Page
+                blog_post: YourApplicationBundle\Entity\BlogPost
 
-3. Create twig template at ``app/Resources/ZenstruckContentBundle/views/Content/blog_post.twig.html``
+    **Note:** in the above example the *machine name* of class ``BlogPost`` is ``blog_post``.
+    This naming convention is important.
 
-**Note:** in the above example the *machine name* of class ``BlogPost`` is ``blog_post``.
-This naming convention is important.
+3. To use the controller that this bundle provides activate it in your ``config.yml``:
+
+        zenstruck_content:
+            use_controller: true
+
+4. To provide your own templates set the ``default_template`` option in your ``config.yml``:
+
+        zenstruck_content:
+            default_template: YourApplicationBundle:Content:node.html.twig
+
+    **Note:** the default template name must be ``node``.
 
 # Reference
 
@@ -53,5 +63,13 @@ Override ``Node`` base class:
 
     zenstruck_content:
         node_class:  Your\Node\Class
+
+## Full Default Configuration
+
+    zenstruck_content:
+        use_controller: false
+        default_template: ZenstruckContentBundle:Node:node.html.twig
+        node_class:  Zenstruck\Bundle\ContentBundle\Entity\Node
+        content_types: {}
 
 
