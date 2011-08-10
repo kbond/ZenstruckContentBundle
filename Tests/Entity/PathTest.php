@@ -1,8 +1,8 @@
 <?php
 
-namespace Zenstruck\Bundle\CMSBundle\Tests\Entity;
+namespace Zenstruck\Bundle\ContentBundle\Tests\Entity;
 
-use Zenstruck\Bundle\CMSBundle\Entity\Path;
+use Zenstruck\Bundle\ContentBundle\Entity\Path;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>

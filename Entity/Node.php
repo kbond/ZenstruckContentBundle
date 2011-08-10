@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\Bundle\CMSBundle\Entity;
+namespace Zenstruck\Bundle\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="content_type", type="string", length=50)
- * @ORM\Entity(repositoryClass="Zenstruck\Bundle\CMSBundle\Repository\NodeRepository")
+ * @ORM\Entity(repositoryClass="Zenstruck\Bundle\ContentBundle\Repository\NodeRepository")
  * @ORM\Table(name="zenstruck_cms_node")
  */
 class Node extends Entity
@@ -38,7 +38,7 @@ class Node extends Entity
     /**
      * Set primaryPath
      *
-     * @param Zenstruck\Bundle\CMSBundle\Entity\Path $primaryPath
+     * @param Zenstruck\Bundle\ContentBundle\Entity\Path $primaryPath
      */
     public function setPrimaryPath(Path $primaryPath)
     {
@@ -48,7 +48,7 @@ class Node extends Entity
     /**
      * Get primaryPath
      *
-     * @return Zenstruck\Bundle\CMSBundle\Entity\Path $primaryPath
+     * @return Zenstruck\Bundle\ContentBundle\Entity\Path $primaryPath
      */
     public function getPrimaryPath()
     {

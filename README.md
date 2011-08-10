@@ -3,7 +3,7 @@
 Add routing to your ``routing.yml``:
 
     CMS:
-        resource: "@ZenstruckCMSBundle/Resources/config/routing.yml"
+        resource: "@ZenstruckContentBundle/Resources/config/routing.yml"
 
 # Configuration
 
@@ -13,7 +13,7 @@ Add routing to your ``routing.yml``:
 
         namespace YourApplicationBundle\Entity;
 
-        use Zenstruck\Bundle\CMSBundle\Entity\Node;
+        use Zenstruck\Bundle\ContentBundle\Entity\Node;
 
         /**
          * @orm:Entity
@@ -42,7 +42,7 @@ Add routing to your ``routing.yml``:
             content_types:
                 blog_post: YourApplicationBundle\Entity\Page
 
-3. Create twig template at ``app/Resources/ZenstruckCMSBundle/views/CMS/blog_post.twig.html``
+3. Create twig template at ``app/Resources/ZenstruckContentBundle/views/CMS/blog_post.twig.html``
 
 **Note:** in the above example the *machine name* of class ``BlogPost`` is ``blog_post``.
 This naming convention is important.

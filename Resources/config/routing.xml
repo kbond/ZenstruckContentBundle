@@ -4,11 +4,11 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="cms_node_show" pattern="/node/{id}">
-        <default key="_controller">ZenstruckCMSBundle:Node:show</default>
+        <default key="_controller">ZenstruckContentBundle:Node:show</default>
     </route>
 
     <route id="cms_path_show" pattern="/{uri}">
-        <default key="_controller">ZenstruckCMSBundle:Path:show</default>
+        <default key="_controller">ZenstruckContentBundle:Path:show</default>
         <default key="uri">&lt;front&gt;</default>
         <requirement key="uri">[a-zA-Z0-9_\-\/]+</requirement>
     </route>

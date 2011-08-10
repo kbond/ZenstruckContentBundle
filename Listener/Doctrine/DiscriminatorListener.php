@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\Bundle\CMSBundle\Listener\Doctrine;
+namespace Zenstruck\Bundle\ContentBundle\Listener\Doctrine;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;

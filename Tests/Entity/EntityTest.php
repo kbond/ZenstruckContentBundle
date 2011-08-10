@@ -1,10 +1,10 @@
 <?php
 
-namespace Zenstruck\Bundle\CMSBundle\Tests\Entity;
+namespace Zenstruck\Bundle\ContentBundle\Tests\Entity;
 
-use Zenstruck\Bundle\CMSBundle\Entity\Entity;
-use Zenstruck\Bundle\CMSBundle\Entity\Node;
-use Zenstruck\Bundle\CMSBundle\Tests\Fixtures\BlogCommentAuthor;
+use Zenstruck\Bundle\ContentBundle\Entity\Entity;
+use Zenstruck\Bundle\ContentBundle\Entity\Node;
+use Zenstruck\Bundle\ContentBundle\Tests\Fixtures\BlogCommentAuthor;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>

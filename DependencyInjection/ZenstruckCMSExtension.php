@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\Bundle\CMSBundle\DependencyInjection;
+namespace Zenstruck\Bundle\ContentBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;

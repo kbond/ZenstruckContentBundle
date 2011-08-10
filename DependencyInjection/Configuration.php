@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\Bundle\CMSBundle\DependencyInjection;
+namespace Zenstruck\Bundle\ContentBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->booleanNode('use_controller')->defaultTrue()->end()
-                ->scalarNode('node_class')->defaultValue('Zenstruck\\Bundle\\CMSBundle\\Entity\\Node')->end()
+                ->scalarNode('node_class')->defaultValue('Zenstruck\\Bundle\\ContentBundle\\Entity\\Node')->end()
                 ->arrayNode('content_types')
                     ->useAttributeAsKey('key')
                     ->prototype('scalar')

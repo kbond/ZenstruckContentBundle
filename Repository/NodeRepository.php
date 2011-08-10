@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\Bundle\CMSBundle\Repository;
+namespace Zenstruck\Bundle\ContentBundle\Repository;
 
 use Zenstruck\ZenstruckBundle\Entity\Project;
 use Doctrine\ORM\EntityRepository;
@@ -17,7 +17,7 @@ class NodeRepository extends EntityRepository
 
         $query = $qb
                 ->select('n, p')
-                ->from('ZenstruckCMSBundle:Node', 'n')
+                ->from('ZenstruckContentBundle:Node', 'n')
                 ->leftJoin('n.primaryPath', 'p')
                 ->where('p.uri = :uri')->setParameter('uri', $uri)
                 ->getQuery();

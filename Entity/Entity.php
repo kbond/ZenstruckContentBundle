@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\Bundle\CMSBundle\Entity;
+namespace Zenstruck\Bundle\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

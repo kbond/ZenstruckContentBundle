@@ -1,9 +1,9 @@
 <?php
-namespace Zenstruck\Bundle\CMSBundle\DataFixtures\ORM;
+namespace Zenstruck\Bundle\ContentBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Zenstruck\Bundle\CMSBundle\Entity\Node;
-use Zenstruck\Bundle\CMSBundle\Entity\Path;
+use Zenstruck\Bundle\ContentBundle\Entity\Node;
+use Zenstruck\Bundle\ContentBundle\Entity\Path;
 
 class FixtureLoader implements FixtureInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Zenstruck\Bundle\CMSBundle\Tests\Fixtures;
+namespace Zenstruck\Bundle\ContentBundle\Tests\Fixtures;
 
-use Zenstruck\Bundle\CMSBundle\Entity\Node;
+use Zenstruck\Bundle\ContentBundle\Entity\Node;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
