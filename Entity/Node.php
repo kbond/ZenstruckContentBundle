@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
- * @ZenstruckContentAssert\PathUnique()
  */
 abstract class Node extends Entity
 {

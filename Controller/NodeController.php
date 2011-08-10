@@ -23,7 +23,7 @@ class NodeController
 
     public function showAction($uri)
     {
-        $repository = $this->container->get('doctrine')->getEntityManager()->getRepository('ZenstruckContentBundle:Node');
+        $repository = $this->container->get('doctrine.orm.entity_manager')->getRepository('ZenstruckContentBundle:Node');
         $node = $repository->findOneByPath($uri);
 
         if (!$node) {
