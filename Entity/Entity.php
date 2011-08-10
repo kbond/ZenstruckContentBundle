@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-class Entity
+abstract class Entity
 {
     protected $id;
 

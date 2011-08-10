@@ -3,12 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="cms_node_show" pattern="/node/{id}">
-        <default key="_controller">ZenstruckContentBundle:Node:show</default>
-    </route>
-
-    <route id="cms_path_show" pattern="/{uri}">
-        <default key="_controller">ZenstruckContentBundle:Path:show</default>
+    <route id="zenstruck_content_show" pattern="/{uri}">
+        <default key="_controller">zenstruck_content.controller:showAction</default>
         <default key="uri">&lt;front&gt;</default>
         <requirement key="uri">[a-zA-Z0-9_\-\/]+</requirement>
     </route>

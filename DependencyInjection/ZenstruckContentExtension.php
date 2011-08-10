@@ -24,8 +24,17 @@ class ZenstruckContentExtension extends Extension
         $content_types = array_flip($config['content_types']);
         $content_types[$config['node_class']] = 'node';
 
-        $container->getDefinition('zenstruck.cms.listener.discriminator')
+        $container->getDefinition('zenstruck_content.listener.discriminator')
                     ->replaceArgument(0, $content_types);
+
+        if ($config['use_controller']) {
+            $loader->load('controller.xml');
+
+            $container->getDefinition('zenstruck_content.controller')
+                        ->replaceArgument(1, $config['default_template']);
+        }
+
+
     }
 
 }

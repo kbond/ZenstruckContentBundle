@@ -36,6 +36,6 @@ abstract class Node extends Entity
 
     public function setPath($path)
     {
-        $this->path = $path;
+        $this->path = trim($path, '/');
     }
 }

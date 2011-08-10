@@ -2,13 +2,13 @@
 
 Add routing to your ``routing.yml``:
 
-    CMS:
+    zenstruck_content:
         resource: "@ZenstruckContentBundle/Resources/config/routing.yml"
 
 # Configuration
 
 1. Create a new content-type Entity:
-    
+
         // path/to/your/bundle/Entity/BlogPost.php
 
         namespace YourApplicationBundle\Entity;
@@ -22,10 +22,10 @@ Add routing to your ``routing.yml``:
         {
             /**
              * @orm:Column(type="text", nullable=true)
-             */  
+             */
             protected $body;
 
-            public function getBody()     
+            public function getBody()
             {
                 return $this->body;
             }
@@ -38,11 +38,11 @@ Add routing to your ``routing.yml``:
 
 2. Add new content-type to your ``config.yml``:
 
-        zenstruck_cms:
+        zenstruck_content:
             content_types:
                 blog_post: YourApplicationBundle\Entity\Page
 
-3. Create twig template at ``app/Resources/ZenstruckContentBundle/views/CMS/blog_post.twig.html``
+3. Create twig template at ``app/Resources/ZenstruckContentBundle/views/Content/blog_post.twig.html``
 
 **Note:** in the above example the *machine name* of class ``BlogPost`` is ``blog_post``.
 This naming convention is important.
@@ -51,7 +51,7 @@ This naming convention is important.
 
 Override ``Node`` base class:
 
-    zenstruck_cms:
+    zenstruck_content:
         node_class:  Your\Node\Class
 
 

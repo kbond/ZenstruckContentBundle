@@ -2,27 +2,43 @@
 
 namespace Zenstruck\Bundle\ContentBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class NodeController extends Controller
+class NodeController
 {
-    public function showAction($id)
+    protected $container;
+    protected $defaultTemplate;
+
+    /**
+     * @param EntityManager $em
+     * @param string $defaultTemplate
+     */
+    public function __construct(Container $container, $defaultTemplate)
     {
-        $node = $this->getDoctrine()->getEntityManager()->find('ZenstruckContentBundle:Node', $id);
+        $this->container = $container;
+        $this->defaultTemplate = $defaultTemplate;
+    }
+
+    public function showAction($uri)
+    {
+        $repository = $this->container->get('doctrine')->getEntityManager()->getRepository('ZenstruckContentBundle:Node');
+        $node = $repository->findOneByPath($uri);
 
         if (!$node) {
-            throw $this->createNotFoundException('Node Not Found');
+            throw new NotFoundHttpException('Node not found.');
         }
-        
-        $templating = $this->get('templating');
 
-        $template = 'ZenstruckContentBundle:CMS:'.$node->getContentType().'.html.twig';
+        $templating = $this->container->get('templating');
+
+        $template = str_replace(':node.', ':'.$node->getContentType().'.', $this->defaultTemplate);
 
         if ($templating->exists($template)) {
-            return $this->render($template, array('node' => $node));
+            return $templating->renderResponse($template, array('node' => $node));
         } else {
-            return $this->render('ZenstruckContentBundle:CMS:node.html.twig', array('node' => $node));
+            return $templating->renderResponse($this->defaultTemplate, array('node' => $node));
         }
     }
+
 }
