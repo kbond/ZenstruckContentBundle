@@ -7,12 +7,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 use Doctrine\ORM\EntityManager;
 
-class PathUniqueValidator extends ConstraintValidator
+class SimplePathUniqueValidator extends ConstraintValidator
 {
-    /**
-     * @var \Doctrine\ORM\EntityRepository
-     */
-    protected $pathRepository;
     /**
      * @var \Zenstruck\Bundle\ContentBundle\Repository\NodeRepository
      */
@@ -23,7 +19,6 @@ class PathUniqueValidator extends ConstraintValidator
      */
     public function __construct(EntityManager $em)
     {
-        $this->pathRepository = $em->getRepository('ZenstruckContentBundle:Path');
         $this->nodeRepository = $em->getRepository('ZenstruckContentBundle:Node');
     }
 
@@ -34,28 +29,19 @@ class PathUniqueValidator extends ConstraintValidator
      */
     public function isValid($value, Constraint $constraint)
     {
-        $path = $value->getPrimaryPath();
-        if (null === $path) {
+        if (null === $value) {
 
             return true;
         }
-        $conflicts = $this->pathRepository->findBy(array('uri' => $path->getUri()));
+        $conflicts = $this->nodeRepository->findBy(array('path' => $value->getPath()));
         if (empty($conflicts)) {
 
             return true;
         }
 
-        /* @var \Zenstruck\Bundle\ContentBundle\Entity\Path $old */
-        $old = $value->getOldPrimaryPath();
-        if (!is_object($old)) {
-            $this->setMessage($constraint->message);
-            
-            return false;
-        }
-
         foreach ($conflicts as $conflict) {
-            /* @var \Zenstruck\Bundle\ContentBundle\Entity\Path $conflict */
-            if (($conflict->getId() != $old->getId()) && $this->nodeRepository->findOneByPath($conflict)) {
+            /* @var \Zenstruck\Bundle\ContentBundle\Entity\Node $conflict */
+            if ($conflict->getId() != $value->getId()) {
                 $this->setMessage($constraint->message);
                 
                 return false;

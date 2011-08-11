@@ -21,6 +21,11 @@ abstract class Entity
      */
     protected $createdAt;
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getUpdatedAt()
     {
         return $this->updatedAt;

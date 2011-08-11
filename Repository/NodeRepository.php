@@ -4,24 +4,20 @@ namespace Zenstruck\Bundle\ContentBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+use Doctrine\ORM\Query;
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
  */
 class NodeRepository extends EntityRepository
 {
-
-    public function findOneByUri($uri)
+    public function findOneByPath($uri, $refresh = true)
     {
-        $qb = $this->_em->createQueryBuilder();
+        $node = $this->findOneBy(array('path' => $uri));
+        if ($refresh) {
+            $this->_em->refresh($node);
+        }
 
-        $query = $qb
-                ->select('n, p')
-                ->from('ZenstruckContentBundle:Node', 'n')
-                ->leftJoin('n.primaryPath', 'p')
-                ->where('p.uri = :uri')->setParameter('uri', $uri)
-                ->getQuery();
-
-        return $query->getOneOrNullResult();
+        return $node;
     }
 
 }

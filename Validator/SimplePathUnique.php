@@ -7,13 +7,13 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class PathUnique extends Constraint
+class SimplePathUnique extends Constraint
 {
-    public $message = 'Path already exists.';
+    public $message = 'Path is already used';
 
     public function validatedBy()
     {
-        return 'zenstruck_content.validator.path_unique';
+        return 'zenstruck_content.validator.simple_path_unique';
     }
 
     public function getTargets()

@@ -6,19 +6,10 @@
         
     <services>
         
-
-        <service id="zenstruck_content.path_form_type" class="Zenstruck\Bundle\ContentBundle\Form\Type\PathFormType">
-            <tag name="form.type" alias="zenstruck_content" />
-            <argument type="service" id="zenstruck_content.path_to_string_transformer" />
-        </service>
-        
         <service id="zenstruck_content.node_base_form_type" class="Zenstruck\Bundle\ContentBundle\Form\Type\NodeBaseFormType">
             <tag name="form.type" alias="zenstruck_content_node_base" />
         </service>
 
-        <service id="zenstruck_content.path_to_string_transformer" class="Zenstruck\Bundle\ContentBundle\Form\DataTransformer\PathToStringTransformer" public="false">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-        </service>
     </services>
     
 </container>

@@ -15,6 +15,8 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->booleanNode('use_controller')->defaultFalse()->end()
+                ->booleanNode('use_validator')->defaultFalse()->end()
+                ->booleanNode('use_form')->defaultFalse()->end()
                 ->scalarNode('node_class')->defaultValue('Zenstruck\\Bundle\\ContentBundle\\Entity\\Node')->end()
                 ->scalarNode('default_template')->defaultValue('ZenstruckContentBundle:Node:node.html.twig')->end()
                 ->arrayNode('content_types')

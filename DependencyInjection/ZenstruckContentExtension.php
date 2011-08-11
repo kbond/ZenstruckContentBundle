@@ -19,8 +19,6 @@ class ZenstruckContentExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('listener.xml');
-        $loader->load('form.xml');
-        $loader->load('validator.xml');
 
         // get content types defined in config
         $content_types = array_flip($config['content_types']);
@@ -35,8 +33,13 @@ class ZenstruckContentExtension extends Extension
             $container->getDefinition('zenstruck_content.controller')
                         ->replaceArgument(1, $config['default_template']);
         }
-
-
+        if ($config['use_form']) {
+            $loader->load('form.xml');
+        }
+        if ($config['use_validator']) {
+            $loader->load('validator.xml');
+            $loader->load('validation.xml');
+        }
     }
 
 }

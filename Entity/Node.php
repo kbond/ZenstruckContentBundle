@@ -2,9 +2,6 @@
 
 namespace Zenstruck\Bundle\ContentBundle\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
-use Zenstruck\Bundle\ContentBundle\Validator as ZenstruckContentAssert;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,8 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class Node extends Entity
 {
     /**
-     * @Assert\NotBlank()
-     * 
      * @var string $title
      */
     protected $title;
