@@ -42,9 +42,10 @@ class SimplePathUniqueValidator extends ConstraintValidator
         foreach ($conflicts as $conflict) {
             /* @var \Zenstruck\Bundle\ContentBundle\Entity\Node $conflict */
             if ($conflict->getId() != $value->getId()) {
-                $this->setMessage($constraint->message);
-                
-                return false;
+                $oldPath = $this->context->getPropertyPath();
+                $this->context->setPropertyPath( empty($oldPath) ? 'path' : $oldPath.".path");
+                $this->context->addViolation($constraint->message, array(), $value->getPath());
+                $this->context->setPropertyPath($oldPath);
             }
         }
 
