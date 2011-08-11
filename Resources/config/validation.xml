@@ -4,9 +4,9 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Zenstruck\ContentBundle\Entity\Node">
+    <class name="Zenstruck\Bundle\ContentBundle\Entity\Node">
 
-        <constraint name="Zenstruck\ContentBundle\Validator\SimplePathUnique">
+        <constraint name="Zenstruck\Bundle\ContentBundle\Validator\SimplePathUnique">
             <option name="message">Path is already used</option>
         </constraint>
 
