@@ -33,8 +33,13 @@ class ZenstruckContentExtension extends Extension
             $container->getDefinition('zenstruck_content.controller')
                         ->replaceArgument(1, $config['default_template']);
         }
-
-
+        if ($config['use_form']) {
+            $loader->load('form.xml');
+        }
+        if ($config['use_validator']) {
+            $loader->load('validator.xml');
+            $loader->load('validation.xml');
+        }
     }
 
 }

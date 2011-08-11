@@ -38,4 +38,5 @@ abstract class Node extends Entity
     {
         $this->path = trim($path, '/');
     }
+
 }
