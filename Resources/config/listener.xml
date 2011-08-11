@@ -11,6 +11,7 @@
     <services>
         <service id="zenstruck_content.listener.discriminator" class="%zenstruck_content.listener.discriminator.class%" public="false">
             <argument /> <!-- content types -->
+            <argument /> <!-- node class -->
             <tag name="doctrine.event_subscriber" />
         </service>
     </services>

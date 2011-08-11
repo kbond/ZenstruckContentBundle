@@ -18,15 +18,19 @@ class ZenstruckContentExtension extends Extension
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('manager.xml');
         $loader->load('listener.xml');
         $loader->load('validator.xml');
 
+        $container->getDefinition('zenstruck_content.manager')
+                    ->replaceArgument(1, $config['node_class']);
+
         // get content types defined in config
         $content_types = array_flip($config['content_types']);
-        $content_types[$config['node_class']] = 'node';
 
         $container->getDefinition('zenstruck_content.listener.discriminator')
-                    ->replaceArgument(0, $content_types);
+                    ->replaceArgument(0, $content_types)
+                    ->replaceArgument(1, $config['node_class']);
 
         if ($config['use_controller']) {
             $loader->load('controller.xml');

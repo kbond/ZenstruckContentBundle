@@ -8,10 +8,10 @@
         <!-- Path Unique Validator Service -->
         <service id="zenstruck_content.validator.simple_path_unique"
                  class="Zenstruck\Bundle\ContentBundle\Validator\SimplePathUniqueValidator">
-            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="zenstruck_content.manager" />
             <tag name="validator.constraint_validator" alias="zenstruck_content.validator.simple_path_unique" />
         </service>
-        
+
     </services>
 
 </container>

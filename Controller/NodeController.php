@@ -23,8 +23,7 @@ class NodeController
 
     public function showAction($uri)
     {
-        $repository = $this->container->get('doctrine.orm.entity_manager')->getRepository('ZenstruckContentBundle:Node');
-        $node       = $repository->findOneByPath($uri);
+        $node = $this->container->get('zenstruck_content.manager')->findOneByPath($uri);
 
         if (!$node) {
             throw new NotFoundHttpException('Node not found.');

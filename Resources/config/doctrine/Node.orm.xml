@@ -4,15 +4,8 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Zenstruck\Bundle\ContentBundle\Entity\Node"
-                       table="zenstruck_content_node"
-                       inheritance-type="JOINED"
-                       repository-class="Zenstruck\Bundle\ContentBundle\Repository\NodeRepository">
-
-        <discriminator-column name="content_type" type="string" length="50" />
-
-        <field name="title" type="string" length="255" />
+    <mapped-superclass name="Zenstruck\Bundle\ContentBundle\Entity\Node">
         <field name="path" type="string" length="255" unique="true" />
-    </entity>
+    </mapped-superclass>
 
 </doctrine-mapping>

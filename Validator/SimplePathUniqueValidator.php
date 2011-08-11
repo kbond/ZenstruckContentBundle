@@ -5,7 +5,7 @@ namespace Zenstruck\Bundle\ContentBundle\Validator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-use Doctrine\ORM\EntityManager;
+use Zenstruck\Bundle\ContentBundle\Entity\NodeManager;
 
 class SimplePathUniqueValidator extends ConstraintValidator
 {
@@ -17,9 +17,9 @@ class SimplePathUniqueValidator extends ConstraintValidator
     /**
      * @param \Doctrine\ORM\EntityRepository $repository
      */
-    public function __construct(EntityManager $em)
+    public function __construct(NodeManager $nodeManager)
     {
-        $this->nodeRepository = $em->getRepository('ZenstruckContentBundle:Node');
+        $this->nodeRepository = $nodeManager->getRepository();
     }
 
     /**
@@ -51,5 +51,5 @@ class SimplePathUniqueValidator extends ConstraintValidator
 
         return true;
     }
-    
+
 }
