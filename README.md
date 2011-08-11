@@ -68,7 +68,6 @@ Override ``Node`` base class:
 
     zenstruck_content:
         use_controller: false
-        use_validator: false
         use_form: false
         default_template: ZenstruckContentBundle:Node:node.html.twig
         node_class:  Zenstruck\Bundle\ContentBundle\Entity\Node
@@ -76,7 +75,6 @@ Override ``Node`` base class:
 
 # TODO
 
-* Look into moving the form's global *PathUnique* error message to the path field
 * Advanced implementation using nested set extension
 
 
