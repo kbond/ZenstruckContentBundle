@@ -15,16 +15,12 @@ class DiscriminatorListener implements EventSubscriber
 
     protected $contentTypes;
 
-    protected $nodeClass;
-
     /**
      * @param string $contentTypes
-     * @param string $nodeClass
      */
-    public function __construct($contentTypes, $nodeClass)
+    public function __construct($contentTypes)
     {
         $this->contentTypes = $contentTypes;
-        $this->nodeClass = $nodeClass;
     }
 
     public function getSubscribedEvents()
@@ -42,21 +38,15 @@ class DiscriminatorListener implements EventSubscriber
         if ($classMetadata->name == $subclasses['node']) {
             unset($subclasses['node']);
             $classMetadata->subClasses = $subclasses;
-        }
 
-        /*$this->contentTypes[$this->nodeClass] = 'node';
-
-        if ($classMetadata->name == $this->nodeClass) {
-
-            $classMetadata->subClasses = $subclasses;
-
-            /*$classMetadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_JOINED);
+            // setup node inheritance
+            $classMetadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_JOINED);
             $classMetadata->setDiscriminatorColumn(array(
                 'name' => 'content_type',
                 'type' => 'string',
                 'length' => 50
             ));
-        }*/
+        }
 
         // check if class is defined in config
         if (isset($this->contentTypes[$classMetadata->name])) {
