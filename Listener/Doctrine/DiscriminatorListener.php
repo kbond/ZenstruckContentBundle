@@ -39,19 +39,24 @@ class DiscriminatorListener implements EventSubscriber
         // add subclasses to node
         $subclasses = array_flip($this->contentTypes);
 
-        $this->contentTypes[$this->nodeClass] = 'node';
+        if ($classMetadata->name == $subclasses['node']) {
+            unset($subclasses['node']);
+            $classMetadata->subClasses = $subclasses;
+        }
+
+        /*$this->contentTypes[$this->nodeClass] = 'node';
 
         if ($classMetadata->name == $this->nodeClass) {
 
             $classMetadata->subClasses = $subclasses;
 
-            $classMetadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_JOINED);
+            /*$classMetadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_JOINED);
             $classMetadata->setDiscriminatorColumn(array(
                 'name' => 'content_type',
                 'type' => 'string',
                 'length' => 50
             ));
-        }
+        }*/
 
         // check if class is defined in config
         if (isset($this->contentTypes[$classMetadata->name])) {

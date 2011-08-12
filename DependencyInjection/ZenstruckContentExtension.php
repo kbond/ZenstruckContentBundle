@@ -27,6 +27,7 @@ class ZenstruckContentExtension extends Extension
 
         // get content types defined in config
         $content_types = array_flip($config['content_types']);
+        $content_types[$config['node_class']] = 'node';
 
         $container->getDefinition('zenstruck_content.listener.discriminator')
                     ->replaceArgument(0, $content_types)
