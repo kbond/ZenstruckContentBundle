@@ -7,14 +7,20 @@
     <class name="Zenstruck\Bundle\ContentBundle\Entity\Node">
 
         <constraint name="Zenstruck\Bundle\ContentBundle\Validator\SimplePathUnique">
-            <option name="message">Path is already used</option>
+            <option name="message">This path is already used.  Please choose another.</option>
         </constraint>
+
+        <property name="path">
+            <constraint name="NotBlank">
+                <option name="message">Please enter a path.</option>
+            </constraint>
+        </property>
 
         <property name="title">
             <constraint name="NotBlank">
-                <option name="message">Please enter title</option>
+                <option name="message">Please enter a title.</option>
             </constraint>
         </property>
-        
+
     </class>
 </constraint-mapping>
