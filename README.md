@@ -1,19 +1,34 @@
-# Installation
+# Information
 
-Add routing to your ``routing.yml``:
-
-    zenstruck_content:
-        resource: "@ZenstruckContentBundle/Resources/config/routing.yml"
+This Bundle uses Doctrine2's Class Table Inheritance
+(see http://www.doctrine-project.org/docs/orm/2.1/en/reference/inheritance-mapping.html#class-table-inheritance)
+for more information.  The problem with Doctrine2's implementation is it requires
+you set all your inherited Entities in the top most Entity.  With this Bundle
+they are setup in your ``config.yml``.
 
 # Configuration
 
-1. Create a new content-type Entity:
+1. Create a ``Node`` class:
+
+        // path/to/your/bundle/Entity/Node.php
+
+        namespace YourApplicationBundle\Entity;
+
+        use Zenstruck\Bundle\ContentBundle\Entity\Node as BaseNode;
+
+        /**
+         * @orm:Entity
+         */
+        class Node extends BaseNode
+        {
+            // add any node fields (or leave empty)
+        }
+
+2. Create one or more content-type Entities (extending from your ``Node`` entity):
 
         // path/to/your/bundle/Entity/BlogPost.php
 
         namespace YourApplicationBundle\Entity;
-
-        use Zenstruck\Bundle\ContentBundle\Entity\Node;
 
         /**
          * @orm:Entity
@@ -36,33 +51,37 @@ Add routing to your ``routing.yml``:
             }
         }
 
-2. Add new content-type to your ``config.yml``:
+    **Note**: They can also extend eachother (``Node->Page->BlogPost``)
+
+3. Add your node class and any new content-types to your ``config.yml``:
 
         zenstruck_content:
+                node_class: YourApplicationBundle\Entity\Node
             content_types:
-                blog_post: YourApplicationBundle\Entity\BlogPost
+                blog_post:  YourApplicationBundle\Entity\BlogPost
+                ...
 
     **Note:** in the above example the *machine name* of class ``BlogPost`` is ``blog_post``.
     This naming convention is important.
 
-3. To use the controller that this bundle provides activate it in your ``config.yml``:
+4. (optional) To use the controller that this bundle provides activate it in your ``config.yml``:
 
         zenstruck_content:
             use_controller: true
 
-4. To provide your own templates set the ``default_template`` option in your ``config.yml``:
+5. (optional) If you used the controller in step 4, add the routing:
+
+        zenstruck_content:
+            resource: "@ZenstruckContentBundle/Resources/config/routing.xml"
+
+# Reference
+
+To provide your own templates set the ``default_template`` option in your ``config.yml``:
 
         zenstruck_content:
             default_template: YourApplicationBundle:Content:node.html.twig
 
-    **Note:** the default template name must be ``node``.
-
-# Reference
-
-Override ``Node`` base class:
-
-    zenstruck_content:
-        node_class:  Your\Node\Class
+**Note:** the default template name must be ``node``.
 
 ## Full Default Configuration
 
@@ -70,7 +89,7 @@ Override ``Node`` base class:
         use_controller: false
         use_form: false
         default_template: ZenstruckContentBundle:Node:node.html.twig
-        node_class:  Zenstruck\Bundle\ContentBundle\Entity\Node
+        node_class:  Zenstruck\Bundle\ContentBundle\Entity\Node # required
         content_types: {}
 
 # TODO
