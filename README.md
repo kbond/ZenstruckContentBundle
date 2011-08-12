@@ -1,8 +1,9 @@
 # Information
 
-This Bundle uses Doctrine2's Class Table Inheritance
-(see http://www.doctrine-project.org/docs/orm/2.1/en/reference/inheritance-mapping.html#class-table-inheritance)
-for more information.  The problem with Doctrine2's implementation is it requires
+This Bundle allows for various *content-types* using Doctrine2's Class Table Inheritance
+(see http://www.doctrine-project.org/docs/orm/2.1/en/reference/inheritance-mapping.html#class-table-inheritance
+for more information).  It allows for all your content-types to inherit from a single ``Node``.
+The problem with Doctrine2's implementation is it requires
 you set all your inherited Entities in the top most Entity.  With this Bundle
 they are setup in your ``config.yml``.
 
@@ -51,7 +52,7 @@ they are setup in your ``config.yml``.
             }
         }
 
-    **Note**: They can also extend eachother (``Node->Page->BlogPost``)
+    **Note**: They can also extend eachother (``BlogPost->Page->Node``)
 
 3. Add your node class and any new content-types to your ``config.yml``:
 
