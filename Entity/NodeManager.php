@@ -36,6 +36,33 @@ class NodeManager
     }
 
     /**
+     * Returns the line of ancestors starting with highest
+     *
+     * @param Node $node
+     */
+    public function getAncestors(Node $node)
+    {
+        $ancestorArray = $node->getAncestorArray();
+
+        // @todo find a better sorting method
+        $query = $this->em->createQuery("SELECT n, LENGTH(n.path) as length FROM ".$this->getClass().
+                " n WHERE n.path IN ('".  implode("', '", $ancestorArray)."') ".
+                "ORDER BY length");
+
+        $results = $query->getResult();
+
+        $ret = array();
+
+        // @todo find a one step hyrdate solution
+        // loop thu mixed results to convert to pure
+        foreach ($results as $result) {
+            $ret[] = $result[0];
+        }
+
+        return $ret;
+    }
+
+    /**
      * @return \Doctrine\ORM\EntityRepository
      */
     public function getRepository()

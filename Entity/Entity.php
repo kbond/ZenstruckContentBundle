@@ -69,6 +69,11 @@ abstract class Entity
         $this->updatedAt = new \DateTime();
     }
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
     /**
      * Returns the machine name of the class (without namespace)
      */

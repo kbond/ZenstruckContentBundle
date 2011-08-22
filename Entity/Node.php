@@ -25,4 +25,42 @@ abstract class Node extends Entity
         $this->path = trim($path, '/');
     }
 
+    /**
+     * Returns the an array of ancestors based on the path
+     *
+     * Example:
+     *
+     * If path = /foo/bar/baz/bin
+     *
+     * Returns: array(
+     *              'foo',
+     *              'foo/bar',
+     *              'foo/bar/baz'
+     *          )
+     *
+     * @return array
+     */
+    public function getAncestorArray()
+    {
+        $pathArray = explode('/', $this->path);
+
+        array_pop($pathArray);
+
+        $ancestors = array();
+        $pathString = null;
+
+        foreach ($pathArray as $path) {
+
+            if (!$pathString) {
+                $pathString = $path;
+            } else {
+                $pathString .= '/'.$path;
+            }
+
+            $ancestors[] = $pathString;
+        }
+
+        return $ancestors;
+    }
+
 }

@@ -35,4 +35,32 @@ class PathTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('blog_comment_author', $entity->getContentType());
     }
 
+    public function testGetAncestorArray()
+    {
+        $node = new Node();
+        $node->setPath('foo/bar/baz/biz');
+        $array = $node->getAncestorArray();
+
+        $this->assertTrue(is_array($array));
+        $this->assertEquals(3, count($array));
+        $this->assertEquals('foo', $array[0]);
+        $this->assertEquals('foo/bar', $array[1]);
+        $this->assertEquals('foo/bar/baz', $array[2]);
+
+        $node = new Node();
+        $node->setPath('foo/bar');
+        $array = $node->getAncestorArray();
+
+        $this->assertTrue(is_array($array));
+        $this->assertEquals(1, count($array));
+        $this->assertEquals('foo', $array[0]);
+
+        $node = new Node();
+        $node->setPath('foo');
+        $array = $node->getAncestorArray();
+
+        $this->assertTrue(is_array($array));
+        $this->assertEquals(0, count($array));
+    }
+
 }

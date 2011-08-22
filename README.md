@@ -77,12 +77,35 @@ they are setup in your ``config.yml``.
 
 # Reference
 
+## Manager
+
+There is a manager class that is available from the service container via the id
+``zenstruck_content.manager``.
+
+### Breadcrumbs
+
+The manager contains a function called ``getAncestors(Node $node)``.  This returns
+an array of Ancestor nodes based on the path of the current ``Node`` given.
+
+For instance, if you pass a node with path ``foo/bar/baz`` it will return an array of nodes
+with path's ``foo``/``foo/bar`` if they exist and in that order.
+
+#### Usage
+
+        // controller
+        $manager = $this->container->get('zenstruck_content.manager');
+        $manager->getAncestors($node);
+
+## Template
+
 To provide your own templates set the ``default_template`` option in your ``config.yml``:
 
         zenstruck_content:
             default_template: YourApplicationBundle:Content:node.html.twig
 
 **Note:** the default template name must be ``node``.
+
+
 
 ## Full Default Configuration
 

@@ -23,20 +23,28 @@ class NodeController
 
     public function showAction($uri)
     {
-        $node = $this->container->get('zenstruck_content.manager')->findOneByPath($uri);
+        $manager = $this->container->get('zenstruck_content.manager');
+        $node = $manager->findOneByPath($uri);
 
         if (!$node) {
             throw new NotFoundHttpException('Node not found.');
         }
 
+        $breadcrumbs = $manager->getAncestors($node);
+
         $templating = $this->container->get('templating');
+
+        $parameters = array(
+            'node' => $node,
+            'breadcrumbs' => $breadcrumbs
+        );
 
         $template = str_replace(':node.', ':'.$node->getContentType().'.', $this->defaultTemplate);
 
         if ($templating->exists($template)) {
-            return $templating->renderResponse($template, array('node' => $node));
+            return $templating->renderResponse($template, $parameters);
         } else {
-            return $templating->renderResponse($this->defaultTemplate, array('node' => $node));
+            return $templating->renderResponse($this->defaultTemplate, $parameters);
         }
     }
 
