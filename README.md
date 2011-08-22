@@ -88,7 +88,7 @@ The manager contains a function called ``getAncestors(Node $node)``.  This retur
 an array of Ancestor nodes based on the path of the current ``Node`` given.
 
 For instance, if you pass a node with path ``foo/bar/baz`` it will return an array of nodes
-with path's ``foo``/``foo/bar`` if they exist and in that order.
+with path's ``foo`` and ``foo/bar`` if they exist and in that order.
 
 #### Usage
 
