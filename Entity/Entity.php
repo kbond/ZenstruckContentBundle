@@ -71,7 +71,7 @@ abstract class Entity
 
     public function __toString()
     {
-        return $this->getTitle();
+        return (string) $this->getTitle();
     }
 
     /**
