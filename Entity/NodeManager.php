@@ -44,10 +44,15 @@ class NodeManager
     {
         $ancestorArray = $node->getAncestorArray();
 
+        $class = $this->getClass();
+
         // @todo find a better sorting method
-        $query = $this->em->createQuery("SELECT n, LENGTH(n.path) as length FROM ".$this->getClass().
-                " n WHERE n.path IN ('".  implode("', '", $ancestorArray)."') ".
-                "ORDER BY length");
+        // @todo find out why I can't set a :class parameter
+        $query = $this->em->createQuery("SELECT n, LENGTH(n.path) as length FROM $class n WHERE n.path IN (:ids) ORDER BY length");
+
+        $query->setParameters(array(
+            'ids' => $ancestorArray
+        ));
 
         $results = $query->getResult();
 
