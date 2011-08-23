@@ -44,6 +44,10 @@ class NodeManager
     {
         $ancestorArray = $node->getAncestorArray();
 
+        if (empty ($ancestorArray)) {
+            return array();
+        }
+
         $class = $this->getClass();
 
         // @todo find a better sorting method
