@@ -1,7 +1,7 @@
 # Information
 
-This Bundle allows for various *content-types* using Doctrine2's Class Table Inheritance
-(see http://www.doctrine-project.org/docs/orm/2.1/en/reference/inheritance-mapping.html#class-table-inheritance
+This Bundle allows for various *content-types* using Doctrine2's Inheritance
+(see http://www.doctrine-project.org/docs/orm/2.1/en/reference/inheritance-mapping.html
 for more information).  It allows for all your content-types to inherit from a single ``Node``.
 The problem with Doctrine2's implementation is it requires
 you set all your inherited Entities in the top most Entity.  With this Bundle
@@ -96,12 +96,24 @@ with path's ``foo`` and ``foo/bar`` if they exist and in that order.
         $manager = $this->container->get('zenstruck_content.manager');
         $manager->getAncestors($node);
 
+## Inheritance Type
+
+By default Doctrine2's *Class Table Inheritance* is used.  This means each content-type
+extending from ``Node`` is it's own table linking back to the base ``node`` table.  There
+is also the option of using *Class Table Inheritance*.  All content types will be
+stored in the same table.
+
+You can enable this in your ``config.yml``:
+
+    zenstruck_content:
+        inheritance_type: single_table
+
 ## Template
 
 To provide your own templates set the ``default_template`` option in your ``config.yml``:
 
-        zenstruck_content:
-            default_template: YourApplicationBundle:Content:node.html.twig
+    zenstruck_content:
+        default_template: YourApplicationBundle:Content:node.html.twig
 
 **Note:** the default template name must be ``node``.
 
@@ -112,6 +124,7 @@ To provide your own templates set the ``default_template`` option in your ``conf
     zenstruck_content:
         use_controller: false
         use_form: false
+        inheritance_type: class_table # or single_table
         default_template: ZenstruckContentBundle:Node:node.html.twig
         node_class:  Zenstruck\Bundle\ContentBundle\Entity\Node # required
         content_types: {}

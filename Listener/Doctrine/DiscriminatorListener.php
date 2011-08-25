@@ -14,13 +14,15 @@ class DiscriminatorListener implements EventSubscriber
 {
 
     protected $contentTypes;
+    protected $inheritanceType;
 
     /**
      * @param string $contentTypes
      */
-    public function __construct($contentTypes)
+    public function __construct($contentTypes, $inhertianceType)
     {
         $this->contentTypes = $contentTypes;
+        $this->inheritanceType = $inhertianceType;
     }
 
     public function getSubscribedEvents()
@@ -39,8 +41,22 @@ class DiscriminatorListener implements EventSubscriber
             unset($subclasses['node']);
             $classMetadata->subClasses = $subclasses;
 
-            // setup node inheritance
-            $classMetadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_JOINED);
+            switch ($this->inheritanceType) {
+                case 'single_table':
+                    $classMetadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_SINGLE_TABLE);
+                    break;
+
+                case 'table_per_class':
+                    $classMetadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_TABLE_PER_CLASS);
+                    break;
+
+                default:
+                    $classMetadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_JOINED);
+                    break;
+            }
+
+
+
             $classMetadata->setDiscriminatorColumn(array(
                 'name' => 'content_type',
                 'type' => 'string',

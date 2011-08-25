@@ -17,6 +17,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('node_class')->isRequired()->end()
                 ->booleanNode('use_controller')->defaultFalse()->end()
                 ->booleanNode('use_form')->defaultFalse()->end()
+                ->scalarNode('inheritance_type')->defaultValue('class_table')->end()
                 ->scalarNode('default_template')->defaultValue('ZenstruckContentBundle:Node:node.html.twig')->end()
                 ->arrayNode('content_types')
                     ->useAttributeAsKey('key')
