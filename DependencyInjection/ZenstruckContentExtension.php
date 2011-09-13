@@ -31,7 +31,8 @@ class ZenstruckContentExtension extends Extension
 
         $container->getDefinition('zenstruck_content.listener.discriminator')
                     ->replaceArgument(0, $content_types)
-                    ->replaceArgument(1, $config['inheritance_type']);
+                    ->replaceArgument(1, $config['inheritance_type'])
+                    ->replaceArgument(2, $config['discriminator_column']);
 
         if ($config['use_controller']) {
             $loader->load('controller.xml');

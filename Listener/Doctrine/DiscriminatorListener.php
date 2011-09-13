@@ -15,14 +15,16 @@ class DiscriminatorListener implements EventSubscriber
 
     protected $contentTypes;
     protected $inheritanceType;
+    protected $discriminatorColumn;
 
     /**
      * @param string $contentTypes
      */
-    public function __construct($contentTypes, $inhertianceType)
+    public function __construct($contentTypes, $inhertianceType, $discriminatorColumn)
     {
         $this->contentTypes = $contentTypes;
         $this->inheritanceType = $inhertianceType;
+        $this->discriminatorColumn = $discriminatorColumn;
     }
 
     public function getSubscribedEvents()
@@ -58,7 +60,7 @@ class DiscriminatorListener implements EventSubscriber
 
 
             $classMetadata->setDiscriminatorColumn(array(
-                'name' => 'content_type',
+                'name' => $this->discriminatorColumn,
                 'type' => 'string',
                 'length' => 50
             ));
