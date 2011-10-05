@@ -125,6 +125,7 @@ To provide your own templates set the ``default_template`` option in your ``conf
         use_controller: false
         use_form: false
         inheritance_type: class_table # or single_table
+        node_type_name: node
         discriminator_column: content_type # the column name
         default_template: ZenstruckContentBundle:Node:node.html.twig
         node_class:  Zenstruck\Bundle\ContentBundle\Entity\Node # required

@@ -12,18 +12,21 @@ class NodeManager
     protected $em;
     protected $class;
     protected $repository;
+    protected $contentTypes;
 
     /**
      * @param EntityManager $em
      * @param string $class
      */
-    public function __construct(EntityManager $em, $class)
+    public function __construct(EntityManager $em, $class, $contentTypes)
     {
         $this->em = $em;
         $this->repository = $em->getRepository($class);
 
         $metadata = $em->getClassMetadata($class);
         $this->class = $metadata->name;
+
+        $this->contentTypes = $contentTypes;
     }
 
     /**
@@ -77,6 +80,11 @@ class NodeManager
     public function getRepository()
     {
         return $this->repository;
+    }
+
+    public function getContentTypes()
+    {
+        return $this->contentTypes;
     }
 
     /**

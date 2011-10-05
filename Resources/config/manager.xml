@@ -12,6 +12,7 @@
         <service id="zenstruck_content.manager" class="%zenstruck_content.manager.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument /> <!-- node_class -->
+            <argument /> <!-- content types -->
         </service>
     </services>
 

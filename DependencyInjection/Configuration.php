@@ -15,6 +15,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('node_class')->isRequired()->end()
+                ->scalarNode('node_type_name')->defaultValue('node')->end()
                 ->booleanNode('use_controller')->defaultFalse()->end()
                 ->booleanNode('use_form')->defaultFalse()->end()
                 ->scalarNode('inheritance_type')->defaultValue('class_table')->end()

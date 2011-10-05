@@ -23,7 +23,8 @@ class ZenstruckContentExtension extends Extension
         $loader->load('validator.xml');
 
         $container->getDefinition('zenstruck_content.manager')
-                    ->replaceArgument(1, $config['node_class']);
+                    ->replaceArgument(1, $config['node_class'])
+                    ->replaceArgument(2, array_merge(array($config['node_type_name'] => $config['node_class']), $config['content_types']));
 
         // get content types defined in config
         $content_types = array_flip($config['content_types']);
