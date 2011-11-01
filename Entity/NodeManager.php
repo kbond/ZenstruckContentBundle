@@ -88,6 +88,14 @@ class NodeManager
     }
 
     /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    public function getEntityManager()
+    {
+        return $this->em;
+    }
+
+    /**
      * @return string
      */
     public function getClass()

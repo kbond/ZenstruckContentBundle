@@ -6,10 +6,10 @@
 
     <services>
         <!-- Path Unique Validator Service -->
-        <service id="zenstruck_content.validator.simple_path_unique"
-                 class="Zenstruck\Bundle\ContentBundle\Validator\SimplePathUniqueValidator">
+        <service id="zenstruck_content.validator.inherited_unique_entity"
+                 class="Zenstruck\Bundle\ContentBundle\Validator\InheritedUniqueEntityValidator">
             <argument type="service" id="zenstruck_content.manager" />
-            <tag name="validator.constraint_validator" alias="zenstruck_content.validator.simple_path_unique" />
+            <tag name="validator.constraint_validator" alias="zenstruck_content.validator.inherited_unique_entity" />
         </service>
 
     </services>

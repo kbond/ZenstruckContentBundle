@@ -6,8 +6,9 @@
 
     <class name="Zenstruck\Bundle\ContentBundle\Entity\Node">
 
-        <constraint name="Zenstruck\Bundle\ContentBundle\Validator\SimplePathUnique">
-            <option name="message">This path is already used.  Please choose another.</option>
+        <constraint name="Zenstruck\Bundle\ContentBundle\Validator\InheritedUniqueEntity">
+            <option name="message">This path is already used. Please choose another.</option>
+            <option name="field">path</option>
         </constraint>
 
         <property name="path">
