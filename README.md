@@ -92,9 +92,9 @@ with path's ``foo`` and ``foo/bar`` if they exist and in that order.
 
 #### Usage
 
-        // controller
-        $manager = $this->container->get('zenstruck_content.manager');
-        $manager->getAncestors($node);
+    // controller
+    $manager = $this->container->get('zenstruck_content.manager');
+    $manager->getAncestors($node);
 
 ## Inheritance Type
 
@@ -117,7 +117,47 @@ To provide your own templates set the ``default_template`` option in your ``conf
 
 **Note:** the default template name must be ``node``.
 
+## InheritedUniqueEntity constraint
 
+This bundles comes with a custom ``UniqueEntity`` validation constraint.  The default Doctrine
+one has problems with inheritance.  It only checks the values of entities within it's current
+scope and children.  For instance if you have this structure: ``BlogPost->Page->Node``
+and place the default Doctrine ``UniqueEntity`` constraint on a field in ``Page``.  Saving a
+``BlogPost`` with a field that is the same as one in ``Page`` will not cause the constraint
+to become invalid.
+
+The ``InheritedUniqueEntity`` constraint packaged with this
+bundle does.
+
+### Usage
+
+The following demonstrates adding a UniqueEntity constraint on the ``body`` field of the ``Page``
+entity.  All classes that inherit from ``Page`` will have this constraint in the ``Page`` scope.
+
+    namespace Acme\DemoBundle\Entity;
+
+    use Doctrine\ORM\Mapping as ORM;
+    use Zenstruck\Bundle\ContentBundle\Validator\InheritedUniqueEntity;
+
+    /**
+     * Acme\DemoBundle\Entity\Node
+     *
+     * @ORM\Table(name="page")
+     * @ORM\Entity
+     * @InheritedUniqueEntity(field="body")
+     */
+    class Page extends Node
+    {
+
+        /**
+         * @var string $body
+         *
+         * @ORM\Column(name="body", type="string", length=255, nullable=true)
+         */
+        protected $body;
+
+        //...
+    }
 
 ## Full Default Configuration
 
