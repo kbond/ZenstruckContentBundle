@@ -1,10 +1,20 @@
 <?php
 
+/*
+ * This file is part of the ZenstruckRedirectBundle package.
+ *
+ * (c) Kevin Bond <http://zenstruck.com/>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Zenstruck\Bundle\ContentBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
 
 /**
+ * @author Kevin Bond <kevinbond@gmail.com>
  * @Annotation
  */
 class InheritedUniqueEntity extends Constraint
