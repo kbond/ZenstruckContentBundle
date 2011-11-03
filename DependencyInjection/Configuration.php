@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the ZenstruckRedirectBundle package.
+ * This file is part of the ZenstruckContentBundle package.
  *
  * (c) Kevin Bond <http://zenstruck.com/>
  *
