@@ -5,6 +5,7 @@ php:
   - 5.4
 
 before_script:
+    - git checkout master
     - php bin/vendors install
     - php bin/prepare-test-env
 
@@ -12,5 +13,5 @@ script: phpunit -c app/
 
 branches:
   only:
-    - sandbox
+    - master
 
