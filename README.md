@@ -1,5 +1,7 @@
 # Information
 
+[![Build Status](https://secure.travis-ci.org/kbond/ZenstruckContentBundle.png)](http://travis-ci.org/kbond/ZenstruckContentBundle)
+
 This Bundle allows for various *content-types* using Doctrine2's Inheritance
 (see http://www.doctrine-project.org/docs/orm/2.1/en/reference/inheritance-mapping.html
 for more information).  It allows for all your content-types to inherit from a single ``Node``.
