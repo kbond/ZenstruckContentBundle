@@ -10,8 +10,3 @@ before_script:
     - php bin/prepare-test-env
 
 script: phpunit -c app/
-
-branches:
-  only:
-    - master
-
