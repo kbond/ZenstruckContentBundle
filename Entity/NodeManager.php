@@ -83,6 +83,38 @@ class NodeManager
         return $ret;
     }
 
+    public function findDescendants(Node $node)
+    {
+        return $this->findPathDescendants($node->getPath());
+    }
+
+    public function findPathDescendants($path)
+    {
+        $class = $this->getClass();
+
+        // @todo find a better sorting method
+        /* @var \Doctrine\ORM\Query $query */
+        $query = $this->em->createQuery("SELECT n, LENGTH(n.path) as length FROM $class n WHERE n.path LIKE :path ORDER BY length");
+
+        $path = $path . '/%';
+
+        $query->setParameters(array(
+            'path' => $path
+        ));
+
+        $results = $query->getResult();
+
+        $ret = array();
+
+        // @todo find a one step hyrdate solution
+        // loop thu mixed results to convert to pure
+        foreach ($results as $result) {
+            $ret[] = $result[0];
+        }
+
+        return $ret;
+    }
+
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
