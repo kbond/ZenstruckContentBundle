@@ -22,12 +22,14 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('zenstruck_cms');
+        $rootNode = $treeBuilder->root('zenstruck_content');
 
         $rootNode
             ->children()
+
                 ->scalarNode('node_class')->isRequired()->end()
                 ->scalarNode('node_type_name')->defaultValue('node')->end()
+                ->scalarNode('manager_class')->defaultNull()->end()
                 ->booleanNode('use_controller')->defaultFalse()->end()
                 ->booleanNode('use_form')->defaultFalse()->end()
                 ->scalarNode('inheritance_type')->defaultValue('class_table')->end()
