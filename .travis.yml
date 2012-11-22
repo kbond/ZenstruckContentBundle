@@ -4,9 +4,10 @@ php:
   - 5.3
   - 5.4
 
-before_script:
-    - git checkout sandbox
-    - php bin/vendors install
-    - php bin/prepare-test-env
+env:
+    - SYMFONY_VERSION=2.0.*
+    - SYMFONY_VERSION=2.1.*
+    - SYMFONY_VERSION=dev-master
 
-script: phpunit -c app/
+before_script:
+    - sh Tests/vendors

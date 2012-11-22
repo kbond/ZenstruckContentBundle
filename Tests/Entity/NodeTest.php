@@ -11,8 +11,8 @@
 
 namespace Zenstruck\Bundle\ContentBundle\Tests\Entity;
 
-use Zenstruck\Bundle\ContentBundle\Tests\Fixtures\Node;
-use Zenstruck\Bundle\ContentBundle\Tests\Fixtures\BlogCommentAuthor;
+use Zenstruck\Bundle\ContentBundle\Tests\Fixtures\App\Bundle\Entity\Page;
+use Zenstruck\Bundle\ContentBundle\Tests\Fixtures\App\Bundle\Entity\BlogPost;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
@@ -22,12 +22,12 @@ class PathTest extends \PHPUnit_Framework_TestCase
 
     public function testSlashesRemoved()
     {
-        $node = new Node();
+        $node = new Page();
         $node->setPath('foo/bar');
 
         $this->assertEquals('foo/bar', $node->getPath());
 
-        $node = new Node();
+        $node = new Page();
         $node->setPath('/foo/bar');
 
         $this->assertEquals('foo/bar', $node->getPath());
@@ -35,18 +35,18 @@ class PathTest extends \PHPUnit_Framework_TestCase
 
     public function testGetContentType()
     {
-        $entity = new Node();
+        $entity = new Page();
 
-        $this->assertEquals('node', $entity->getContentType());
+        $this->assertEquals('page', $entity->getContentType());
 
-        $entity = new BlogCommentAuthor();
+        $entity = new BlogPost();
 
-        $this->assertEquals('blog_comment_author', $entity->getContentType());
+        $this->assertEquals('blog_post', $entity->getContentType());
     }
 
     public function testGetAncestorArray()
     {
-        $node = new Node();
+        $node = new Page();
         $node->setPath('foo/bar/baz/biz');
         $array = $node->getAncestorArray();
 
@@ -56,7 +56,7 @@ class PathTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo/bar', $array[1]);
         $this->assertEquals('foo/bar/baz', $array[2]);
 
-        $node = new Node();
+        $node = new Page();
         $node->setPath('foo/bar');
         $array = $node->getAncestorArray();
 
@@ -64,7 +64,7 @@ class PathTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($array));
         $this->assertEquals('foo', $array[0]);
 
-        $node = new Node();
+        $node = new Page();
         $node->setPath('foo');
         $array = $node->getAncestorArray();
 

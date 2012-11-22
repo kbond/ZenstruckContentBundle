@@ -1,0 +1,2 @@
+ZenstruckContentBundle:
+    resource: "@ZenstruckContentBundle/Resources/config/routing.xml"

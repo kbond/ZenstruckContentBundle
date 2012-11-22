@@ -1,0 +1,7 @@
+{% extends 'ContentTestBundle:Content:node.html.twig' %}
+
+{% block content %}
+    {{ parent() }}
+    <h3>{{ node.tags }}</h3>
+    <p>{{ node.body }}</p>
+{% endblock %}

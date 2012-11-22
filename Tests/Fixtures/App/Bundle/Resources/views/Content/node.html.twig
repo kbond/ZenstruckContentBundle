@@ -1,0 +1,10 @@
+<div id="breadcrumbs">
+    {% for node in breadcrumbs %}
+        <a href="{{ path('zenstruck_content_show', {'uri': node.path }) }}">{{ node }}</a> &raquo;
+    {% endfor %}
+</div>
+
+{% block content %}
+    <h1>{{ node.title }}</h1>
+    <h2>{{ node.contentType }}</h2>
+{% endblock %}
