@@ -1,2 +1,5 @@
+DpnXmlSitemapBundle:
+    resource: "@DpnXmlSitemapBundle/Resources/config/routing.xml"
+
 ZenstruckContentBundle:
     resource: "@ZenstruckContentBundle/Resources/config/routing.xml"

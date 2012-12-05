@@ -26,7 +26,6 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-
                 ->scalarNode('node_class')->isRequired()->end()
                 ->scalarNode('node_type_name')->defaultValue('node')->end()
                 ->scalarNode('manager_class')->defaultNull()->end()
@@ -38,6 +37,13 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('content_types')
                     ->useAttributeAsKey('key')
                     ->prototype('scalar')
+                ->end()
+                ->arrayNode('sitemap')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enabled')->defaultFalse()->end()
+                        ->scalarNode('entity_manager_method')->defaultValue('findAll')->end()
+                    ->end()
                 ->end()
             ->end()
         ;

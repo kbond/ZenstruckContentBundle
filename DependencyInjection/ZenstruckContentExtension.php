@@ -61,6 +61,12 @@ class ZenstruckContentExtension extends Extension
         if ($config['use_form']) {
             $loader->load('form.xml');
         }
+
+        if ($config['sitemap']['enabled']) {
+            $loader->load('sitemap.xml');
+            $container->getDefinition('zenstruck_content.sitemap_generator')
+                ->replaceArgument(1, $config['sitemap']['entity_manager_method']);
+        }
     }
 
 }

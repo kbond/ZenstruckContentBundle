@@ -14,7 +14,8 @@ class TestKernel extends Kernel
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Zenstruck\Bundle\ContentBundle\ZenstruckContentBundle(),
             new \Zenstruck\Bundle\ContentBundle\Tests\Fixtures\App\Bundle\ContentTestBundle(),
-            new \Symfony\Bundle\TwigBundle\TwigBundle()
+            new \Symfony\Bundle\TwigBundle\TwigBundle(),
+            new \Dpn\XmlSitemapBundle\DpnXmlSitemapBundle()
         );
 
         // check for Symfony 2.0

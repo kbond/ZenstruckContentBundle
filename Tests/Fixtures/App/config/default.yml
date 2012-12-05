@@ -3,6 +3,8 @@ zenstruck_content:
     node_type_name: page
     use_controller: true
     default_template: ContentTestBundle:Content:node.html.twig
+    sitemap:
+        enabled: true
     content_types:
         blog_post:  Zenstruck\Bundle\ContentBundle\Tests\Fixtures\App\Bundle\Entity\BlogPost
 

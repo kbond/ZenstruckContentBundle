@@ -16,6 +16,12 @@
         "doctrine/orm"              : "2.*",
         "doctrine/doctrine-bundle"  : "*"
     },
+    "require-dev": {
+        "dpn/xml-sitemap-bundle"    : "dev-master"
+    },
+    "suggest": {
+        "dpn/xml-sitemap-bundle"    : "For generating sitemaps"
+    },
     "autoload": {
         "psr-0": { "Zenstruck\\Bundle\\ContentBundle": "" }
     },

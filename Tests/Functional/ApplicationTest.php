@@ -58,6 +58,19 @@ class ApplicationTest extends WebTestCase
         $this->assertTrue($crawler->filter('#breadcrumbs a')->count() > 0);
     }
 
+    public function testSitemap()
+    {
+        $client = $this->prepareEnvironment();
+        $today = new \DateTime();
+        $today = $today->format('Y-m-d');
+
+        $crawler = $client->request('GET', '/sitemap.xml');
+        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
+        $this->assertEquals(4, $crawler->filter('url')->count());
+        $this->assertTrue($crawler->filter('loc:contains("http://localhost/foo/bar/baz/bam")')->count() > 0);
+        $this->assertTrue($crawler->filter('lastmod:contains("'.$today.'")')->count() > 0);
+    }
+
     protected function prepareEnvironment()
     {
         $client = parent::createClient();
