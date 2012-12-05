@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('default_template')->defaultValue('ZenstruckContentBundle:Node:node.html.twig')->end()
                 ->arrayNode('content_types')
                     ->useAttributeAsKey('key')
-                    ->prototype('scalar')
+                    ->prototype('scalar')->end()
                 ->end()
                 ->arrayNode('sitemap')
                     ->addDefaultsIfNotSet()
