@@ -164,14 +164,18 @@ entity.  All classes that inherit from ``Page`` will have this constraint in the
 ## Full Default Configuration
 
     zenstruck_content:
-        use_controller: false
-        use_form: false
-        inheritance_type: class_table # or single_table
-        node_type_name: node
-        discriminator_column: content_type # the column name
-        default_template: ZenstruckContentBundle:Node:node.html.twig
-        node_class:  Zenstruck\Bundle\ContentBundle\Entity\Node # required
-        content_types: {}
+        node_class:           ~ # Required
+        node_type_name:       node
+        manager_class:        ~
+        use_controller:       false
+        use_form:             false
+        inheritance_type:     class_table
+        discriminator_column: content_type
+        default_template:     ZenstruckContentBundle:Node:node.html.twig
+        content_types: []
+        sitemap:
+            enabled:                false
+            entity_manager_method:  findAll
 
 # TODO
 

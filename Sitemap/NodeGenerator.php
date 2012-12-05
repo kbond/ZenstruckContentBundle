@@ -36,7 +36,7 @@ class NodeGenerator implements GeneratorInterface
     public function generate()
     {
         /** @var $nodes \Zenstruck\Bundle\ContentBundle\Entity\Node[] */
-        $nodes = $this->repository->findAll();
+        $nodes = call_user_func(array($this->repository, $this->method));
 
         $entries = array();
 
