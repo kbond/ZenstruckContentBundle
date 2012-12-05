@@ -13,69 +13,79 @@ they are setup in your ``config.yml``.
 
 1. Create a ``Node`` class:
 
-        // path/to/your/bundle/Entity/Node.php
+    ```php
+    // path/to/your/bundle/Entity/Node.php
 
-        namespace YourApplicationBundle\Entity;
+    namespace YourApplicationBundle\Entity;
 
-        use Zenstruck\Bundle\ContentBundle\Entity\Node as BaseNode;
+    use Zenstruck\Bundle\ContentBundle\Entity\Node as BaseNode;
 
-        /**
-         * @orm:Entity
-         */
-        class Node extends BaseNode
-        {
-            // add any node fields (or leave empty)
-        }
+    /**
+     * @orm:Entity
+     */
+    class Node extends BaseNode
+    {
+        // add any node fields (or leave empty)
+    }
+    ```
 
 2. Create one or more content-type Entities (extending from your ``Node`` entity):
 
-        // path/to/your/bundle/Entity/BlogPost.php
+    ```php
+    // path/to/your/bundle/Entity/BlogPost.php
 
-        namespace YourApplicationBundle\Entity;
+    namespace YourApplicationBundle\Entity;
 
+    /**
+     * @orm:Entity
+     */
+    class BlogPost extends Node
+    {
         /**
-         * @orm:Entity
+         * @orm:Column(type="text", nullable=true)
          */
-        class BlogPost extends Node
+        protected $body;
+
+        public function getBody()
         {
-            /**
-             * @orm:Column(type="text", nullable=true)
-             */
-            protected $body;
-
-            public function getBody()
-            {
-                return $this->body;
-            }
-
-            public function setBody($body)
-            {
-                $this->body = $body;
-            }
+            return $this->body;
         }
+
+        public function setBody($body)
+        {
+            $this->body = $body;
+        }
+    }
+    ```
 
     **Note**: They can also extend eachother (``BlogPost->Page->Node``)
 
 3. Add your node class and any new content-types to your ``config.yml``:
 
-        zenstruck_content:
-                node_class: YourApplicationBundle\Entity\Node
-            content_types:
-                blog_post:  YourApplicationBundle\Entity\BlogPost
-                ...
+    ```yaml
+    zenstruck_content:
+            node_class: YourApplicationBundle\Entity\Node
+        content_types:
+            blog_post:  YourApplicationBundle\Entity\BlogPost
+            ...
+    ```
 
     **Note:** in the above example the *machine name* of class ``BlogPost`` is ``blog_post``.
     This naming convention is important.
 
 4. (optional) To use the controller that this bundle provides activate it in your ``config.yml``:
 
-        zenstruck_content:
-            use_controller: true
+    ```yaml
+    zenstruck_content:
+        use_controller: true
+    ```
 
 5. (optional) If you used the controller in step 4, add the routing:
 
-        zenstruck_content:
-            resource: "@ZenstruckContentBundle/Resources/config/routing.xml"
+    ```yaml
+    zenstruck_content:
+        resource: "@ZenstruckContentBundle/Resources/config/routing.xml"
+    ```
 
 # Reference
 
@@ -94,9 +104,11 @@ with path's ``foo`` and ``foo/bar`` if they exist and in that order.
 
 #### Usage
 
-    // controller
-    $manager = $this->container->get('zenstruck_content.manager');
-    $manager->getAncestors($node);
+```php
+// controller
+$manager = $this->container->get('zenstruck_content.manager');
+$manager->getAncestors($node);
+```
 
 ## Inheritance Type
 
@@ -107,15 +119,19 @@ stored in the same table.
 
 You can enable this in your ``config.yml``:
 
-    zenstruck_content:
-        inheritance_type: single_table
+```yaml
+zenstruck_content:
+    inheritance_type: single_table
+```
 
 ## Template
 
 To provide your own templates set the ``default_template`` option in your ``config.yml``:
 
-    zenstruck_content:
-        default_template: YourApplicationBundle:Content:node.html.twig
+```yaml
+zenstruck_content:
+    default_template: YourApplicationBundle:Content:node.html.twig
+```
 
 **Note:** the default template name must be ``node``.
 
@@ -136,50 +152,73 @@ bundle does.
 The following demonstrates adding a UniqueEntity constraint on the ``body`` field of the ``Page``
 entity.  All classes that inherit from ``Page`` will have this constraint in the ``Page`` scope.
 
-    namespace Acme\DemoBundle\Entity;
+```php
+namespace Acme\DemoBundle\Entity;
 
-    use Doctrine\ORM\Mapping as ORM;
-    use Zenstruck\Bundle\ContentBundle\Validator\InheritedUniqueEntity;
+use Doctrine\ORM\Mapping as ORM;
+use Zenstruck\Bundle\ContentBundle\Validator\InheritedUniqueEntity;
+
+/**
+ * Acme\DemoBundle\Entity\Node
+ *
+ * @ORM\Table(name="page")
+ * @ORM\Entity
+ * @InheritedUniqueEntity(field="body")
+ */
+class Page extends Node
+{
 
     /**
-     * Acme\DemoBundle\Entity\Node
+     * @var string $body
      *
-     * @ORM\Table(name="page")
-     * @ORM\Entity
-     * @InheritedUniqueEntity(field="body")
+     * @ORM\Column(name="body", type="string", length=255, nullable=true)
      */
-    class Page extends Node
-    {
+    protected $body;
 
-        /**
-         * @var string $body
-         *
-         * @ORM\Column(name="body", type="string", length=255, nullable=true)
-         */
-        protected $body;
+    //...
+}
+```
+    
+## Sitemap Generation
 
-        //...
-    }
+This bundle comes with a Sitemap Generator for use with [DpnXmlSitemapBundle](https://github.com/dreipunktnull/DpnXmlSitemapBundle)
+
+## Usage
+
+1. Install and configure [DpnXmlSitemapBundle](https://github.com/dreipunktnull/DpnXmlSitemapBundle)
+2. Enable sitemap generator in your `config.yml`:
+
+    ```yaml
+    zenstruck_content:
+        sitemap:
+            enabled: true
+    ```
+            
+3. By default, the generator uses the `findAll` method on the `Node`'s entity manager.  To use a different method change
+it in your `config.yml`:
+
+    ```yaml
+    zenstruck_content:
+        sitemap:
+            entity_manager_method: myCustomMethod
+    ```
+            
+The sitemap should be available at `/sitemap.xml`.
 
 ## Full Default Configuration
 
-    zenstruck_content:
-        node_class:           ~ # Required
-        node_type_name:       node
-        manager_class:        ~
-        use_controller:       false
-        use_form:             false
-        inheritance_type:     class_table
-        discriminator_column: content_type
-        default_template:     ZenstruckContentBundle:Node:node.html.twig
-        content_types: []
-        sitemap:
-            enabled:                false
-            entity_manager_method:  findAll
-
-# TODO
-
-* Advanced implementation using nested set extension
-
-
-
+```yaml
+zenstruck_content:
+    node_class:           ~ # Required
+    node_type_name:       node
+    manager_class:        ~
+    use_controller:       false
+    use_form:             false
+    inheritance_type:     class_table
+    discriminator_column: content_type
+    default_template:     ZenstruckContentBundle:Node:node.html.twig
+    content_types: []
+    sitemap:
+        enabled:                false
+        entity_manager_method:  findAll
+```
