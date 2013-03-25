@@ -25,5 +25,6 @@
     "autoload": {
         "psr-0": { "Zenstruck\\Bundle\\ContentBundle": "" }
     },
+    "minimum-stability": "alpha",
     "target-dir": "Zenstruck/Bundle/ContentBundle"
 }
