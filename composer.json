@@ -26,5 +26,10 @@
         "psr-0": { "Zenstruck\\Bundle\\ContentBundle": "" }
     },
     "minimum-stability": "alpha",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    },
     "target-dir": "Zenstruck/Bundle/ContentBundle"
 }
