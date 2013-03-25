@@ -21,7 +21,7 @@ use Zenstruck\Bundle\ContentBundle\Entity\NodeManager;
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-class InheritedUniqueEntityValidator extends ConstraintValidator
+class BCInheritedUniqueEntityValidator extends ConstraintValidator
 {
     /** @var \Zenstruck\Bundle\ContentBundle\Entity\NodeManager */
     protected $nodeManager;
