@@ -17,6 +17,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Zenstruck\Bundle\ContentBundle\Entity\NodeManager;
 
 /**
+ * This file is used in Symfony 2.1 and below
+ *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
 class InheritedUniqueEntityValidator extends ConstraintValidator
@@ -37,7 +39,7 @@ class InheritedUniqueEntityValidator extends ConstraintValidator
      * @param \Symfony\Component\Validator\Constraint $constraint
      * @return bool
      */
-    public function validate($node, Constraint $constraint)
+    public function isValid($node, Constraint $constraint)
     {
         if (null === $node) {
             return true;
@@ -45,7 +47,7 @@ class InheritedUniqueEntityValidator extends ConstraintValidator
 
         $em = $this->nodeManager->getEntityManager();
 
-        $className = $this->context->getClassName();
+        $className = $this->context->getCurrentClass();
         $class = $em->getClassMetadata($className);
         $fieldName = $constraint->field;
 

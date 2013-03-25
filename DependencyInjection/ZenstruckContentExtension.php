@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
@@ -32,7 +33,12 @@ class ZenstruckContentExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('manager.xml');
         $loader->load('listener.xml');
-        $loader->load('validator.xml');
+
+        if (version_compare(Kernel::VERSION, '2.2.0', '<')) {
+            $loader->load('validator.bc.xml');
+        } else {
+            $loader->load('validator.xml');
+        }
 
         $container->getDefinition('zenstruck_content.manager')
                     ->replaceArgument(1, $config['node_class'])
