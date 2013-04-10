@@ -79,10 +79,7 @@ class InheritedUniqueEntityValidator extends ConstraintValidator
         foreach ($conflicts as $conflict) {
             /* @var \Zenstruck\Bundle\ContentBundle\Entity\Node $conflict */
             if ($conflict->getId() != $node->getId()) {
-                $old = $this->context->getPropertyPath();
-                $this->context->setPropertyPath( empty($old) ? $fieldName : $old.".".$fieldName);
-                $this->context->addViolation($constraint->message, array(), $fieldValue);
-                $this->context->setPropertyPath($old);
+                $this->context->addViolationAtSubPath($fieldName, $constraint->message);
             }
         }
 

@@ -7,7 +7,7 @@
     <services>
         <!-- Path Unique Validator Service -->
         <service id="zenstruck_content.validator.inherited_unique_entity"
-                 class="Zenstruck\Bundle\ContentBundle\Validator\BC_21_InheritedUniqueEntityValidator">
+                 class="Zenstruck\Bundle\ContentBundle\Validator\BC\InheritedUniqueEntityValidator21">
             <argument type="service" id="zenstruck_content.manager" />
             <tag name="validator.constraint_validator" alias="zenstruck_content.validator.inherited_unique_entity" />
         </service>

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Zenstruck\Bundle\ContentBundle\Validator;
+namespace Zenstruck\Bundle\ContentBundle\Validator\BC;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -17,11 +17,11 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Zenstruck\Bundle\ContentBundle\Entity\NodeManager;
 
 /**
- * This file is used in Symfony 2.1 and below
+ * This file is for Symfony 2.0 BC
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-class BC_20_InheritedUniqueEntityValidator extends ConstraintValidator
+class InheritedUniqueEntityValidator20 extends ConstraintValidator
 {
     /** @var \Zenstruck\Bundle\ContentBundle\Entity\NodeManager */
     protected $nodeManager;
