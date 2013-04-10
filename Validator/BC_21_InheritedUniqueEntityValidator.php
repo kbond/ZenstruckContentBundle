@@ -21,7 +21,7 @@ use Zenstruck\Bundle\ContentBundle\Entity\NodeManager;
  *
  * @author Kevin Bond <kevinbond@gmail.com>
  */
-class BCInheritedUniqueEntityValidator extends ConstraintValidator
+class BC_21_InheritedUniqueEntityValidator extends ConstraintValidator
 {
     /** @var \Zenstruck\Bundle\ContentBundle\Entity\NodeManager */
     protected $nodeManager;
@@ -81,10 +81,7 @@ class BCInheritedUniqueEntityValidator extends ConstraintValidator
         foreach ($conflicts as $conflict) {
             /* @var \Zenstruck\Bundle\ContentBundle\Entity\Node $conflict */
             if ($conflict->getId() != $node->getId()) {
-                $old = $this->context->getPropertyPath();
-                $this->context->setPropertyPath( empty($old) ? $fieldName : $old.".".$fieldName);
-                $this->context->addViolation($constraint->message, array(), $fieldValue);
-                $this->context->setPropertyPath($old);
+                $this->context->addViolationAtSubPath($fieldName, $constraint->message);
             }
         }
 

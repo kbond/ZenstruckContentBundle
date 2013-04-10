@@ -34,8 +34,10 @@ class ZenstruckContentExtension extends Extension
         $loader->load('manager.xml');
         $loader->load('listener.xml');
 
-        if (version_compare(Kernel::VERSION, '2.2.0', '<')) {
-            $loader->load('validator.bc.xml');
+        if (version_compare(Kernel::VERSION, '2.1.0', '<')) {
+            $loader->load('validator.20.xml');
+        } elseif (version_compare(Kernel::VERSION, '2.2.0', '<')) {
+            $loader->load('validator.21.xml');
         } else {
             $loader->load('validator.xml');
         }
