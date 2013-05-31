@@ -14,6 +14,7 @@ namespace Zenstruck\Bundle\ContentBundle\Validator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
+use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Zenstruck\Bundle\ContentBundle\Entity\NodeManager;
 
 /**
@@ -79,7 +80,7 @@ class InheritedUniqueEntityValidator extends ConstraintValidator
         foreach ($conflicts as $conflict) {
             /* @var \Zenstruck\Bundle\ContentBundle\Entity\Node $conflict */
             if ($conflict->getId() != $node->getId()) {
-                $this->context->addViolationAtSubPath($fieldName, $constraint->message);
+                $this->context->addViolationAt($fieldName, $constraint->message);
             }
         }
 
