@@ -81,7 +81,7 @@ class ApplicationTest extends WebTestCase
         $this->runConsole($application, "doctrine:database:create");
         $this->runConsole($application, "doctrine:schema:create");
 
-        $this->em = $client->getContainer()->get('doctrine')->getEntityManager();
+        $this->em = $client->getContainer()->get('doctrine')->getManager();
         $this->addTestData();
 
         return $client;
