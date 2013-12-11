@@ -4,6 +4,7 @@ namespace Zenstruck\Bundle\ContentBundle\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\HttpKernel\Kernel;
 use Zenstruck\Bundle\ContentBundle\Tests\Fixtures\App\Bundle\Entity\Page;
 use Zenstruck\Bundle\ContentBundle\Tests\Fixtures\App\Bundle\Entity\BlogPost;
 
@@ -65,10 +66,20 @@ class ApplicationTest extends WebTestCase
         $today = $today->format('Y-m-d');
 
         $crawler = $client->request('GET', '/sitemap.xml');
-        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
-        $this->assertEquals(4, $crawler->filter('url')->count());
-        $this->assertTrue($crawler->filter('loc:contains("http://localhost/foo/bar/baz/bam")')->count() > 0);
-        $this->assertTrue($crawler->filter('lastmod:contains("'.$today.'")')->count() > 0);
+
+        if (version_compare(Kernel::VERSION, '2.4.0', '<')) {
+            $this->assertTrue(200 === $client->getResponse()->getStatusCode());
+            $this->assertEquals(4, $crawler->filter('url')->count());
+            $this->assertTrue($crawler->filter('loc:contains("http://localhost/foo/bar/baz/bam")')->count() > 0);
+            $this->assertTrue($crawler->filter('lastmod:contains("'.$today.'")')->count() > 0);
+        } else {
+            $this->assertTrue(200 === $client->getResponse()->getStatusCode());
+            $this->assertEquals(4, $crawler->filter('default|url')->count());
+            $this->assertTrue($crawler->filter('default|loc:contains("http://localhost/foo/bar/baz/bam")')->count() > 0);
+            $this->assertTrue($crawler->filter('default|lastmod:contains("'.$today.'")')->count() > 0);
+        }
+
+
     }
 
     protected function prepareEnvironment()
