@@ -25,7 +25,7 @@ class NodeManager
 
     /**
      * @param EntityManager $em
-     * @param string $class
+     * @param string        $class
      */
     public function __construct(EntityManager $em, $class, $contentTypes)
     {
@@ -39,7 +39,7 @@ class NodeManager
     }
 
     /**
-     * @param string $path
+     * @param  string $path
      * @return object
      */
     public function findOneByPath($path)

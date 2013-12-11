@@ -35,8 +35,8 @@ class InheritedUniqueEntityValidator20 extends ConstraintValidator
     }
 
     /**
-     * @param \Zenstruck\Bundle\ContentBundle\Entity\Node $node
-     * @param \Symfony\Component\Validator\Constraint $constraint
+     * @param  \Zenstruck\Bundle\ContentBundle\Entity\Node $node
+     * @param  \Symfony\Component\Validator\Constraint     $constraint
      * @return bool
      */
     public function isValid($node, Constraint $constraint)

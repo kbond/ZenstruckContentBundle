@@ -11,8 +11,6 @@
 
 namespace Zenstruck\Bundle\ContentBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
  */

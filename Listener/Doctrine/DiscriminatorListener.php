@@ -66,8 +66,6 @@ class DiscriminatorListener implements EventSubscriber
                     break;
             }
 
-
-
             $classMetadata->setDiscriminatorColumn(array(
                 'name' => $this->discriminatorColumn,
                 'type' => 'string',

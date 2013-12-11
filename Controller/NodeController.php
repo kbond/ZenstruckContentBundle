@@ -11,7 +11,6 @@
 
 namespace Zenstruck\Bundle\ContentBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -25,7 +24,7 @@ class NodeController
 
     /**
      * @param EntityManager $em
-     * @param string $defaultTemplate
+     * @param string        $defaultTemplate
      */
     public function __construct(Container $container, $defaultTemplate)
     {

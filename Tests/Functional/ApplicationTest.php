@@ -79,7 +79,6 @@ class ApplicationTest extends WebTestCase
             $this->assertTrue($crawler->filter('default|lastmod:contains("'.$today.'")')->count() > 0);
         }
 
-
     }
 
     protected function prepareEnvironment()
@@ -103,6 +102,7 @@ class ApplicationTest extends WebTestCase
         $options["-e"] = "test";
         $options["-q"] = null;
         $options = array_merge($options, array('command' => $command));
+
         return $application->run(new \Symfony\Component\Console\Input\ArrayInput($options));
     }
 
