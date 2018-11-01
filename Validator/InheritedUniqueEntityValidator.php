@@ -80,7 +80,10 @@ class InheritedUniqueEntityValidator extends ConstraintValidator
         foreach ($conflicts as $conflict) {
             /* @var \Zenstruck\Bundle\ContentBundle\Entity\Node $conflict */
             if ($conflict->getId() != $node->getId()) {
-                $this->context->addViolationAt($fieldName, $constraint->message);
+                $this->context->buildViolation($constraint->message)
+                    ->atPath($fieldName)
+                    ->addViolation()
+                ;
             }
         }
 
